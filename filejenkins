@@ -4,13 +4,13 @@ pipeline {
     stages {
        stage('vcs') {
         steps {
-            git url: 'git@github.com:azure-devopspractice/spring-petclinic.git'
-          
+            git url: 'git@github.com:azure-devopspractice/spring-petclinic.git',
+                branch: 'release'    
         }
        }
        stage('merge') {
         steps {
-            sh "git checkout release"
+           
             sh "git merge origin/develop --no-ff"
             sh "git push -u origin release"
         }
@@ -30,7 +30,7 @@ pipeline {
                 rtMavenRun (
                     tool: 'MAVEN-3.6.3', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
-                    goals: 'package',
+                    goals: 'clean package',
                     deployerId: "MAVEN_DEPLOYER"
                 )
             }
