@@ -16,8 +16,8 @@ stages:
             inputs:
               targetType: inline
               script: |
-                git checkout adevops/develop
-                git merge adevops/develop 
+                git merge adevops/develop --no-ff 
+                git push adevops release
           - task: Bash@3
             inputs:
               targetType: inline 
