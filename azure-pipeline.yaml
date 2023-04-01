@@ -1,0 +1,27 @@
+---
+pool: default
+
+schedules:
+  - cron: '* * * * *'
+    displayName: Daily midnight build 
+    branches:
+      include:
+      - release
+stages:
+  - stage: 
+    jobs:
+      - job: 
+        steps:
+          - task: Bash@3
+            inputs:
+              targetType: inline
+              script: |
+                git checkout develop
+                git merge develop 
+          - task: Bash@3
+            inputs:
+              targetType: inline 
+              script: | 
+                echo $(Agent.Name) 
+                echo $(Build.BuildId)     
+            
