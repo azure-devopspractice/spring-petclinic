@@ -1,0 +1,17 @@
+---
+trigger:
+  - develop
+
+pool: default
+
+stages:
+  - stage:
+    jobs:
+      - job:
+        steps:
+          - task: Bash@3
+            inputs:
+              targetType: inline
+              script: |
+                echo $(Agent.JobName)
+                echo $(Build.BuildId)
